@@ -313,6 +313,7 @@ INSTALLED_APPS = (
     'forum',
     'course_material',
     'metron',
+    'avatar',
     # allauth
     'allauth',
     'allauth.account',
@@ -355,6 +356,11 @@ ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_EMAIL_VERIFICATION = True
 ACCOUNT_EMAIL_SUBJECT_PREFIX = "[timtec] "
 SOCIALACCOUNT_EMAIL_VERIFICATION = False
+
+# AVATAR
+AVATAR_STORAGE_DIR = 'user-pictures'
+AVATAR_GRAVATAR_BACKUP = False
+AUTO_GENERATE_AVATAR_SIZES = (260, 80)
 
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to

@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 {% load i18n %}
 {% load staticfiles %}
+{% load avatar_tags %}
 {% block content %}
 <div id="profile" class="container">
   <form class="form-horizontal" method="post" enctype="multipart/form-data">{% csrf_token %}
@@ -35,7 +36,7 @@
           <label for="upload-avatar" class="upload-avatar">
             <span><i class="icon-picture"></i> {% trans "Upload avatar" %}</span>
             <div class="thumbnail">
-              <img id="profile-avatar" width="256" src="{{ form.instance.get_picture_url }}">
+                <img id="profile-avatar" width="256" src="{% avatar_url user 260 %}">
             </div>
           </label>
           <input type="file" name="picture" id="upload-avatar" class="hidden"/>

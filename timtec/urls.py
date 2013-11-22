@@ -73,6 +73,9 @@ urlpatterns = patterns(
     # The django-allauth
     url(r'^accounts/', include('allauth.urls')),
 
+    # django-avatar
+    url(r'^avatar/', include('avatar.urls')),
+
     # The django-rosetta
     url(r'^rosetta/', include('rosetta.urls')),
 )

@@ -2,6 +2,7 @@
 from django.contrib.auth import get_user_model
 from django import forms
 from django.utils.translation import ugettext_lazy as _
+from avatar.models import Avatar
 
 User = get_user_model()
 
@@ -31,4 +32,7 @@ class ProfileEditForm(forms.ModelForm):
     def save(self, commit=True):
         if self.cleaned_data['password1']:
             self.instance.set_password(self.cleaned_data['password1'])
+        if self.cleaned_data['picture']:
+            avatar = Avatar.objects.create(user=self.instance, primary=True,
+                                           avatar=self.cleaned_data['picture'])
         return super(ProfileEditForm, self).save(commit=commit)
