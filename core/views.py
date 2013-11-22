@@ -10,7 +10,7 @@ from rest_framework.response import Response
 from braces.views import LoginRequiredMixin
 
 from serializers import CourseSerializer
-from models import Course, StudentProgress
+from models import Course, StudentProgress, CourseStudent
 
 from forms import ContactForm
 
@@ -58,6 +58,11 @@ class CourseView(DetailView):
 
             user_is_enrolled = self.object.students.filter(id=user.id).exists()
             context['user_is_enrolled'] = user_is_enrolled
+
+            if user_is_enrolled:
+                course_student = CourseStudent.objects.get(user=user, course=context['course'])
+                last_unit = course_student.resume_last_unit()
+                context['resume_unit'] = last_unit
 
         return context
 
