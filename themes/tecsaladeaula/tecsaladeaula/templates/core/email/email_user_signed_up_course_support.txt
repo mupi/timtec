@@ -1,4 +1,0 @@
-Usuário {{ username }} se inscreveu no curso {{ course_name }}.
-
-Data e horário: {{ datetime }}
-Email: {{ email }}
