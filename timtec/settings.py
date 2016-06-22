@@ -32,6 +32,7 @@ MANAGERS = (ADMINS[1],)
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 EMAIL_HOST = 'localhost'
+EMAIL_SUPPORT = 'suporte@mupi.me'
 DEFAULT_FROM_EMAIL = 'donotreply-dev@m.timtec.com.br'
 CONTACT_RECIPIENT_LIST = ['timtec-dev@listas.hacklab.com.br', ]
 
