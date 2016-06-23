@@ -130,18 +130,13 @@ class Course(models.Model):
 
     def enroll_student(self, student):
         now = datetime.datetime.now()
-        course_link = 'http://tecsaladeaula.com.br/course/' + self.slug + '/intro/'
 
         if not Class.objects.filter(course=self, students=student).exists():
             self.default_class.students.add(student)
-            send_mail('Usuário Cadastrou-se em um Curso', get_template('core/email/email_user_signed_up_course_support.txt').render(Context({'username': student.username, 'course_name': self.name, 'datetime': now.strftime("%d/%m/%Y - %H:%M"), 'email': student.email})), settings.EMAIL_SUPPORT, [settings.EMAIL_SUPPORT])
+            send_mail('Usuário Cadastrou-se em um Curso', get_template('core/email/email_user_signed_up_course_support.txt').render(Context({'username': student.username, 'course_name': self.name, 'datetime': now.strftime("%d/%m/%Y - %H:%M"), 'email': student.email})),settings.EMAIL_SUPPORT, [settings.EMAIL_SUPPORT])
+
         if not CourseStudent.objects.filter(course=self, user=student).exists():
-            if self.tuition == 0:
-                send_mail('Inscrição em Curso Mupi', get_template('core/email/email_user_signed_up_free_course.txt').render(Context({'username': student.username, 'course_name': self.name})), settings.DEFAULT_FROM_EMAIL, [student.email])
-                CourseStudent.objects.create(course=self, user=student, status='2')
-            else:
-                CourseStudent.objects.create(course=self, user=student)
-                send_mail('Inscrição em Curso Mupi', get_template('core/email/email_user_signed_up_paid_course.txt').render(Context({'username': student.username, 'course_name': self.name, 'course_link': course_link})), settings.DEFAULT_FROM_EMAIL, [student.email])
+            CourseStudent.objects.create(course=self, user=student)
 
     def is_enrolled(self, user):
         return CourseStudent.objects.filter(course=self, user=user).exists()
