@@ -133,7 +133,7 @@ class Course(models.Model):
 
         if not Class.objects.filter(course=self, students=student).exists():
             self.default_class.students.add(student)
-            send_mail('Usuário Cadastrou-se em um Curso', get_template('core/email/email_user_signed_up_course_support.txt').render(Context({'username': student.username, 'course_name': self.name, 'datetime': now.strftime("%d/%m/%Y - %H:%M"), 'email': student.email})),settings.EMAIL_SUPPORT, [settings.EMAIL_SUPPORT])
+            send_mail('Usuário Cadastrou-se em um Curso', get_template('core/email/email_user_signed_up_course_support.txt').render(Context({'username': student.username, 'course_name': self.name, 'datetime': now.strftime("%d/%m/%Y - %H:%M"), 'email': student.email})), settings.EMAIL_SUPPORT, [settings.EMAIL_SUPPORT])
 
         if not CourseStudent.objects.filter(course=self, user=student).exists():
             CourseStudent.objects.create(course=self, user=student)
